@@ -4,6 +4,8 @@ import 'package:movie_app/model/movie_detail.dart';
 import 'package:movie_app/model/movie_genres.dart';
 import 'package:movie_app/model/genre.dart';
 import 'package:movie_app/model/now_playing.dart';
+import 'package:movie_app/model/person.dart';
+import 'package:movie_app/model/person_detail.dart';
 
 class ApiServices {
   final Dio _dio = Dio();
@@ -52,6 +54,36 @@ class ApiServices {
     }
   }
 
+  Future<List<Person>> personPopular() async {
+    try{
+
+      final response = await _dio.get('$baseUrl/trending/person/week?api_key=$apiKey');
+      var personData = response.data['results'] as List;
+
+      List<Person> nowPlayingList = personData.map((e) => Person.fromJson(e)).toList();
+
+      return nowPlayingList;
+
+    }catch(e){
+      print(e);
+    }
+  }
+
+  Future<PersonDetail> personDetail(personId) async {
+    try{
+      //https://api.themoviedb.org/3/person/287?api_key=ede1a2f4a1664112304074565cfc151e&language=en-US
+      final response = await _dio.get('$baseUrl/person/$personId?api_key=$apiKey');
+
+      print(response.data);
+
+
+    }catch(e){
+      print(e);
+    }
+  }
+
+
+
   Future<MovieDetail> movieDetail (movieId) async {
     try {
       //https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
@@ -62,6 +94,7 @@ class ApiServices {
      // Instance of 'MovieDetail'
 
        movieDetail.castList = await getCastList(movieId);
+       movieDetail.youtubeTrailerId = await getTrailerYoutubeId(movieId);
       //Instance of 'Cast',
      return movieDetail;
 
@@ -87,6 +120,40 @@ class ApiServices {
       print(e);
     }
   }
+
+
+  Future<List<NowPlaying>> topRated() async {
+    try{
+
+      final response = await _dio.get('$baseUrl/movie/top_rated?api_key=$apiKey');
+      var trendList = response.data['results'] as List;
+
+      List<NowPlaying> trendListDetail = trendList.map((e) => NowPlaying.fromJson(e)).toList();
+
+      return trendListDetail;
+
+    }catch(e){
+      print(e);
+    }
+  }
+
+
+  Future<String> getTrailerYoutubeId(movieId) async {
+    try{
+
+      final response = await _dio.get('$baseUrl/movie/$movieId/videos?api_key=$apiKey');
+      var youtubeList = response.data['results'] as List;
+      var youtubeKey = youtubeList[0]["key"];
+
+      return youtubeKey;  // odM92ap8_c0
+
+
+    }catch(e){
+      print(e);
+    }
+  }
+
+  // https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=<<api_key>>&language=en-US
 
 
 }

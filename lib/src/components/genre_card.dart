@@ -12,7 +12,7 @@ class GenreCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => MovieGenreDetails(genreId: genreId,)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MovieGenreDetails(genreId: genreId, genreName: genre,)));
       },
       child: Container(
         alignment: Alignment.center,

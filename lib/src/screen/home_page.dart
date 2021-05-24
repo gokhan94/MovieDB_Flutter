@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/src/components/body.dart';
+import 'package:movie_app/src/components/top_rated.dart';
 
-class HomePage extends StatelessWidget {
+
+class HomePage extends StatefulWidget {
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
        appBar: _buildAppBar(),
       body: Body(),
     );
@@ -12,7 +21,7 @@ class HomePage extends StatelessWidget {
 
   _buildAppBar() {
     return  AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade100,
       elevation: 0,
       leading: IconButton(
           onPressed: () {},
@@ -22,12 +31,15 @@ class HomePage extends StatelessWidget {
           )),
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => TopRatedMovieSlider()));
+            },
             icon: Icon(
-              Icons.search,
-              color: Colors.black45,
+              Icons.trending_up_rounded,
+              color: Colors.black,
             ))
       ],
     );
   }
+
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/model/credits.dart';
 import '../../../../const.dart';
 
-class CastAndCrew extends StatelessWidget {
-  final List casts;
+class CastList extends StatelessWidget {
 
-  const CastAndCrew({Key key, this.casts}) : super(key: key);
+  final List<Cast> casts;
+
+  const CastList({Key key, this.casts}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,11 @@ class CastAndCrew extends StatelessWidget {
               itemCount: casts.length,
               itemBuilder: (context, index) {
                 return CastCard(
-                  cast: casts[index],
+                  name: casts[index].name,
+                  image: casts[index].profilePath,
+                  originalName: casts[index].originalName,
                 );
+                //Text(casts[index].name);
               },
             ),
           )
@@ -36,9 +41,14 @@ class CastAndCrew extends StatelessWidget {
 }
 
 class CastCard extends StatelessWidget {
-  final Map cast;
+  final name;
+  final image;
+  final originalName;
 
-  const CastCard({Key key, this.cast}) : super(key: key);
+  const CastCard({Key key, this.name, this.image, this.originalName})
+      : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,25 +58,26 @@ class CastCard extends StatelessWidget {
         child: Column(
           children: [
             Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage(
-                      cast['image'],
-                    ),
-                  ),
-                )),
+              height: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                    image:
+                        NetworkImage("http://image.tmdb.org/t/p/w500/${image}"),
+                    fit: BoxFit.cover),
+              ),
+            ),
+
             // SizedBox(height: kDefaultPadding / 2),
             Text(
-              cast['orginalName'],
+              originalName,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyText2,
               maxLines: 2,
             ),
             SizedBox(height: 2),
             Text(
-              cast['movieName'],
+              name,
               maxLines: 1,
               textAlign: TextAlign.center,
               style: TextStyle(color: kTextLightColor),

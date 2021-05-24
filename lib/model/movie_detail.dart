@@ -56,6 +56,7 @@ class MovieDetail {
   int voteCount;
 
   List<Cast> castList;
+  String youtubeTrailerId;
 
   factory MovieDetail.fromJson(Map<String, dynamic> json) => MovieDetail(
     backdropPath: json["backdrop_path"],

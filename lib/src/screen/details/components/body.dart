@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/model/movie_detail.dart';
 import 'package:movie_app/model/now_playing.dart';
 import 'package:movie_app/service/api_services.dart';
@@ -20,17 +18,6 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  /*@override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getMovie(widget.movie.id);
-  }
-
-  void getMovie(movie) async {
-    return await _apiService.movieDetail(movie).then((value) => print(value.genres));
-  }*/
-
   @override
   Widget build(BuildContext context) {
     // total widht and height
@@ -42,13 +29,12 @@ class _BodyState extends State<Body> {
           future: _apiService.movieDetail(widget.movie.id),
           builder: (BuildContext context, AsyncSnapshot<MovieDetail> snapshot) {
             if (snapshot.hasData) {
-
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BackRating(size: size, movie: snapshot.data),
                   DurationAndButton(movie: snapshot.data),
-                  //  Genres(movie: movie),
+                  Genres(movie: snapshot.data),
                   Padding(
                     padding: EdgeInsets.symmetric(
                       vertical: 15,
@@ -69,8 +55,7 @@ class _BodyState extends State<Body> {
                       ),
                     ),
                   ),
-
-                  //CastAndCrew(casts: movie.cast)
+                  CastList(casts: snapshot.data.castList)
                 ],
               );
             } else {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/model/movie_detail.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../const.dart';
 
@@ -26,7 +26,7 @@ class DurationAndButton extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text(
-                      '${movie.releaseDate}',
+                      '${movie.runtime}',
                       style: TextStyle(color: kTextLightColor),
                     ),
                     SizedBox(width: kDefaultPadding),
@@ -36,7 +36,7 @@ class DurationAndButton extends StatelessWidget {
                     ),
                     SizedBox(width: kDefaultPadding),
                     Text(
-                      "2h 32min",
+                      "${movie.releaseDate}",
                       style: TextStyle(color: kTextLightColor),
                     ),
                   ],
@@ -44,21 +44,55 @@ class DurationAndButton extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 50,
-            width: 50,
-            child: TextButton(
-              onPressed: (){
-                print("ok");
-              },
-              style: ButtonStyle(
-                  backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.red)),
-              child: Icon(
-                Icons.video_collection_rounded,
-                size: 28,
-                color: Colors.white,
+          InkWell(
+            onTap: () async {
+
+
+              final youtubeUrl =
+                  'https://www.youtube.com/watch?v=${movie.youtubeTrailerId}';
+
+              //await launch(youtubeUrl);
+
+              if(await canLaunch(youtubeUrl)){
+                await launch(youtubeUrl);
+              }
+
+              /*if (await canLaunch(youtubeUrl)) {
+                //print(youtubeUrl);
+                await launch(youtubeUrl);
+              }*/
+
+
+
+            },
+            child: SizedBox(
+              height: 50,
+              width: 50,
+              child:Container(
+                color: Colors.red,
+                child: Icon(
+                  Icons.video_collection_rounded,
+                  size: 28,
+                  color: Colors.white,
+                ),
               ),
+
+
+
+             /* TextButton(
+                //onPressed: (){},
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.red)),
+                child: Icon(
+                  Icons.video_collection_rounded,
+                  size: 28,
+                  color: Colors.white,
+                ),
+              ),
+
+              */
+
             ),
           )
         ],
