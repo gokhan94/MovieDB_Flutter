@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/model/movie_detail.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:intl/intl.dart';
 import '../../../../const.dart';
 
 class DurationAndButton extends StatelessWidget {
@@ -10,6 +10,9 @@ class DurationAndButton extends StatelessWidget {
   const DurationAndButton({Key key, this.movie}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var inputFormat = DateFormat('dd/MM/yyyy');
+    var releaseDate = inputFormat.format(movie.releaseDate);
+
     return Padding(
       padding: EdgeInsets.all(kDefaultPadding),
       child: Row(
@@ -20,24 +23,21 @@ class DurationAndButton extends StatelessWidget {
               children: <Widget>[
                 Text(
                   movie.title,
-                  style: Theme.of(context).textTheme.headline5,
+                  style: TextStyle(fontSize: 26),
                 ),
                 SizedBox(height: kDefaultPadding / 2),
                 Row(
                   children: <Widget>[
                     Text(
-                      '${movie.runtime}',
-                      style: TextStyle(color: kTextLightColor),
+                      '${movie.status}',
+                      style:
+                          TextStyle(color: Colors.grey.shade600, fontSize: 18),
                     ),
                     SizedBox(width: kDefaultPadding),
                     Text(
-                      "PG-13",
-                      style: TextStyle(color: kTextLightColor),
-                    ),
-                    SizedBox(width: kDefaultPadding),
-                    Text(
-                      "${movie.releaseDate}",
-                      style: TextStyle(color: kTextLightColor),
+                      "$releaseDate",
+                      style:
+                          TextStyle(color: Colors.grey.shade600, fontSize: 18),
                     ),
                   ],
                 )
@@ -46,14 +46,12 @@ class DurationAndButton extends StatelessWidget {
           ),
           InkWell(
             onTap: () async {
-
-
               final youtubeUrl =
                   'https://www.youtube.com/watch?v=${movie.youtubeTrailerId}';
 
               //await launch(youtubeUrl);
 
-              if(await canLaunch(youtubeUrl)){
+              if (await canLaunch(youtubeUrl)) {
                 await launch(youtubeUrl);
               }
 
@@ -61,14 +59,11 @@ class DurationAndButton extends StatelessWidget {
                 //print(youtubeUrl);
                 await launch(youtubeUrl);
               }*/
-
-
-
             },
             child: SizedBox(
               height: 50,
               width: 50,
-              child:Container(
+              child: Container(
                 color: Colors.red,
                 child: Icon(
                   Icons.video_collection_rounded,
@@ -77,9 +72,7 @@ class DurationAndButton extends StatelessWidget {
                 ),
               ),
 
-
-
-             /* TextButton(
+              /* TextButton(
                 //onPressed: (){},
                 style: ButtonStyle(
                     backgroundColor:
@@ -92,7 +85,6 @@ class DurationAndButton extends StatelessWidget {
               ),
 
               */
-
             ),
           )
         ],

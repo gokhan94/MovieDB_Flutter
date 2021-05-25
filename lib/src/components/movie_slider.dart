@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/model/now_playing.dart';
 import 'package:movie_app/service/api_services.dart';
 import 'package:movie_app/src/components/movie_card.dart';
-
 import '../../const.dart';
 
 class MovieSlider extends StatefulWidget {
@@ -58,8 +56,7 @@ class _MovieSliderState extends State<MovieSlider> {
                 return CircularProgressIndicator();
               }
             },
-          )
-          ),
+          )),
     );
   }
 }

@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/model/person.dart';
 import 'package:movie_app/service/api_services.dart';
+import 'package:movie_app/src/screen/details/person_details.dart';
 
 import '../../const.dart';
 
-class CategoryList extends StatefulWidget {
+class Persons extends StatefulWidget {
   @override
-  _CategoryListState createState() => _CategoryListState();
+  _PersonsState createState() => _PersonsState();
 }
 
-class _CategoryListState extends State<CategoryList> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    ApiServices _apiService = ApiServices();
-    _apiService.personPopular();
-  }
-
+class _PersonsState extends State<Persons> {
   @override
   Widget build(BuildContext context) {
     ApiServices _apiService = ApiServices();
@@ -52,7 +45,8 @@ class PersonList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print(person.id);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => PersonDetails(person: person)));
+
       },
       child: Container(
           margin: EdgeInsets.only(right: kDefaultPadding),

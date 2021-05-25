@@ -18,9 +18,14 @@ class MovieGenreDetails extends StatelessWidget {
         elevation: 0.3,
         centerTitle: true,
         backgroundColor: Colors.white,
-        leading:  Icon(
-          Icons.arrow_back,
-          color: Colors.indigoAccent,
+        leading: IconButton(
+          icon:  Icon(
+            Icons.arrow_back,
+            color: Colors.indigoAccent,
+          ),
+          onPressed: (){
+            Navigator.pop(context);
+          },
         ),
         title: Text(
           genreName + " genre movies",

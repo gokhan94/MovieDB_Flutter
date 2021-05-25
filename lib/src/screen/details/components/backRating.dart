@@ -4,7 +4,6 @@ import 'package:movie_app/model/movie_detail.dart';
 import '../../../../const.dart';
 
 class BackRating extends StatelessWidget {
-
   final Size size;
   final MovieDetail movie;
 
@@ -12,7 +11,7 @@ class BackRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       height: size.height * 0.4,
       child: Stack(
         children: [
@@ -20,7 +19,7 @@ class BackRating extends StatelessWidget {
             height: size.height * 0.4 - 50,
             decoration: BoxDecoration(
                 borderRadius:
-                BorderRadius.only(bottomLeft: Radius.circular(50)),
+                    BorderRadius.only(bottomLeft: Radius.circular(50)),
                 image: DecorationImage(
                     image: NetworkImage(
                         "http://image.tmdb.org/t/p/w500/${movie.posterPath}"),
@@ -52,6 +51,7 @@ class BackRating extends StatelessWidget {
                         Icon(
                           Icons.star,
                           color: Colors.yellow,
+                          size: 28,
                         ),
                         SizedBox(
                           height: kDefaultPadding / 4,
@@ -60,36 +60,45 @@ class BackRating extends StatelessWidget {
                             text: TextSpan(
                                 style: TextStyle(color: Colors.black87),
                                 children: [
-                                  TextSpan(
-                                      text: "${movie.voteAverage}/",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600)),
-                                  TextSpan(text: "10\n"),
-                                  TextSpan(text: movie.popularity.toString(),style: TextStyle(
-                                    color: kTextLightColor,
+                              TextSpan(
+                                  text: "${movie.voteAverage} /",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600)),
+                              TextSpan(
+                                  text: " 10 \n",
+                                  style: TextStyle(
+                                    fontSize: 17,
                                   )),
-                                ]))
+                            ]))
                       ],
                     ),
-
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                        ),
+                        Text("Popularity",
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 20)),
                         SizedBox(height: kDefaultPadding / 4),
-                        Text("Rate This",
-                            style: Theme.of(context).textTheme.bodyText2),
+                        Text("${movie.popularity}",
+                            style: TextStyle(
+                                color: Colors.yellow.shade700,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold)),
                       ],
                     ),
-
-
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
+                        SizedBox(height: kDefaultPadding / 2),
+                        Text(
+                          "Vote Count",
+                          style: TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
                         Container(
                           padding: EdgeInsets.all(6),
                           decoration: BoxDecoration(
@@ -99,22 +108,12 @@ class BackRating extends StatelessWidget {
                           child: Text(
                             "${movie.voteCount}",
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 17,
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
-                        SizedBox(height: kDefaultPadding / 4),
-                        Text(
-                          "Metascore",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          "62 critic reviews",
-                          style: TextStyle(color: kTextLightColor),
-                        )
                       ],
                     ),
                   ],

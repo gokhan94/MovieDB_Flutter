@@ -74,8 +74,9 @@ class ApiServices {
       //https://api.themoviedb.org/3/person/287?api_key=ede1a2f4a1664112304074565cfc151e&language=en-US
       final response = await _dio.get('$baseUrl/person/$personId?api_key=$apiKey');
 
-      print(response.data);
+      PersonDetail personDetail = PersonDetail.fromJson(response.data);
 
+      return personDetail;
 
     }catch(e){
       print(e);

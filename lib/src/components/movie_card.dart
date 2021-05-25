@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/model/now_playing.dart';
 import 'package:movie_app/src/screen/details/details_screen.dart';
-
 import '../../const.dart';
 
 class MovieCard extends StatelessWidget {
@@ -15,21 +13,26 @@ class MovieCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: InkWell(
-        onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsScreen(movie: movie,)));
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DetailsScreen(
+                        movie: movie,
+                      )));
         },
         child: Column(
           children: [
             Expanded(
                 child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      boxShadow: [kDefaultShadow],
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              "http://image.tmdb.org/t/p/w500/${movie.posterPath}"),
-                          fit: BoxFit.cover)),
-                )),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  boxShadow: [kDefaultShadow],
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          "http://image.tmdb.org/t/p/w500/${movie.posterPath}"),
+                      fit: BoxFit.cover)),
+            )),
             Padding(
               padding: EdgeInsets.symmetric(vertical: kDefaultPadding / 2),
               child: Text(
@@ -43,14 +46,13 @@ class MovieCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                /*  SvgPicture.asset(
-                  "assets/icons/star_fill.svg",
-                  height: 20,
-                ),*/
                 SizedBox(width: kDefaultPadding / 2),
                 Text(
                   "${movie.popularity}",
-                  style: Theme.of(context).textTheme.bodyText2,
+                  style: TextStyle(
+                      color: Colors.yellow.shade900,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
                 )
               ],
             )
