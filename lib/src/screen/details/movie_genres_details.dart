@@ -51,7 +51,9 @@ class MovieGenreDetails extends StatelessWidget {
                           return FlatButton(
                             child: MovieCell(snapshot.data, index),
                             padding:  EdgeInsets.all(0.0),
-                            color: Colors.white, onPressed: () {  },
+                            color: Colors.white, onPressed: () {
+                              print(snapshot.data[index]);
+                          },
                           );
                         }),
                   )

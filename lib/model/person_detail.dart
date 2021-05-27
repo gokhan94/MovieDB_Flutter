@@ -31,6 +31,8 @@ class PersonDetail {
   String placeOfBirth;
   String profilePath;
 
+  //     id: json['name'] == null ? null : json['name'] as String,
+
   factory PersonDetail.fromJson(Map<String, dynamic> json) => PersonDetail(
     birthday: DateTime.parse(json["birthday"]),
     knownForDepartment: json["known_for_department"],

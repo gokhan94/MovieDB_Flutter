@@ -53,7 +53,7 @@ class _MovieSliderState extends State<MovieSlider> {
                       );
                     });
               } else {
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               }
             },
           )),

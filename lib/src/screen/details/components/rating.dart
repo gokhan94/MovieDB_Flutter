@@ -3,11 +3,11 @@ import 'package:movie_app/model/movie_detail.dart';
 
 import '../../../../const.dart';
 
-class BackRating extends StatelessWidget {
+class Rating extends StatelessWidget {
   final Size size;
   final MovieDetail movie;
 
-  const BackRating({Key key, this.size, this.movie}) : super(key: key);
+  const Rating({Key key, this.size, this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

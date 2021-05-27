@@ -4,10 +4,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/intl.dart';
 import '../../../../const.dart';
 
-class DurationAndButton extends StatelessWidget {
+class MovieTrailer extends StatelessWidget {
   final MovieDetail movie;
 
-  const DurationAndButton({Key key, this.movie}) : super(key: key);
+  const MovieTrailer({Key key, this.movie}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var inputFormat = DateFormat('dd/MM/yyyy');
@@ -49,42 +49,20 @@ class DurationAndButton extends StatelessWidget {
               final youtubeUrl =
                   'https://www.youtube.com/watch?v=${movie.youtubeTrailerId}';
 
-              //await launch(youtubeUrl);
-
-              if (await canLaunch(youtubeUrl)) {
-                await launch(youtubeUrl);
-              }
-
-              /*if (await canLaunch(youtubeUrl)) {
-                //print(youtubeUrl);
-                await launch(youtubeUrl);
-              }*/
+              await launch(youtubeUrl);
             },
             child: SizedBox(
               height: 50,
               width: 50,
               child: Container(
-                color: Colors.red,
+                decoration: BoxDecoration(
+                    color: Colors.red, borderRadius: BorderRadius.circular(10)),
                 child: Icon(
                   Icons.video_collection_rounded,
                   size: 28,
                   color: Colors.white,
                 ),
               ),
-
-              /* TextButton(
-                //onPressed: (){},
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.red)),
-                child: Icon(
-                  Icons.video_collection_rounded,
-                  size: 28,
-                  color: Colors.white,
-                ),
-              ),
-
-              */
             ),
           )
         ],

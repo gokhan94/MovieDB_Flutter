@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/model/movie_detail.dart';
 import 'package:movie_app/model/now_playing.dart';
 import 'package:movie_app/service/api_services.dart';
-import 'package:movie_app/src/screen/details/components/backRating.dart';
-import 'package:movie_app/src/screen/details/components/castAndCrew.dart';
-import 'package:movie_app/src/screen/details/components/durationAndButton.dart';
+import 'package:movie_app/src/screen/details/components/rating.dart';
+import 'package:movie_app/src/screen/details/components/cast.dart';
+import 'package:movie_app/src/screen/details/components/movie_trailer.dart';
 import 'package:movie_app/src/screen/details/components/genres.dart';
 import '../../../../const.dart';
 
@@ -32,8 +32,8 @@ class _BodyState extends State<Body> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BackRating(size: size, movie: snapshot.data),
-                  DurationAndButton(movie: snapshot.data),
+                  Rating(size: size, movie: snapshot.data),
+                  MovieTrailer(movie: snapshot.data),
                   Genres(movie: snapshot.data),
                   Padding(
                     padding: EdgeInsets.symmetric(

@@ -36,6 +36,7 @@ class _PersonsState extends State<Persons> {
   }
 }
 
+
 class PersonList extends StatelessWidget {
   final Person person;
 
@@ -45,8 +46,10 @@ class PersonList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => PersonDetails(person: person)));
-
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PersonDetails(person: person)));
       },
       child: Container(
           margin: EdgeInsets.only(right: kDefaultPadding),
@@ -58,8 +61,10 @@ class PersonList extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                      image: NetworkImage(
-                          "http://image.tmdb.org/t/p/w500/${person.profilePath}"),
+                      image: person.profilePath != null
+                          ? NetworkImage(
+                          "http://image.tmdb.org/t/p/w500/${person.profilePath}")
+                          : AssetImage('assets/images/user.png'),
                       fit: BoxFit.cover),
                 ),
               ),

@@ -4,6 +4,9 @@
 
 import 'dart:convert';
 
+import 'package:movie_app/model/person.dart';
+
+
 CastList castListFromJson(String str) => CastList.fromJson(json.decode(str));
 
 String castListToJson(CastList data) => json.encode(data.toJson());
@@ -50,6 +53,7 @@ class Cast {
   int castId;
   String character;
   String job;
+
 
   factory Cast.fromJson(Map<String, dynamic> json) => Cast(
         gender: json["gender"],

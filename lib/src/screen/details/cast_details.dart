@@ -1,19 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/person.dart';
+import 'package:intl/intl.dart';
 import 'package:movie_app/model/person_detail.dart';
 import 'package:movie_app/service/api_services.dart';
-import 'package:intl/intl.dart';
 
-class PersonDetails extends StatefulWidget {
-  final Person person;
+class CastDetails extends StatefulWidget {
+  final castId;
 
-  const PersonDetails({Key key, this.person}) : super(key: key);
+  const CastDetails({Key key, this.castId}) : super(key: key);
 
   @override
-  _PersonDetailsState createState() => _PersonDetailsState();
+  _CastDetailsState createState() => _CastDetailsState();
 }
 
-class _PersonDetailsState extends State<PersonDetails> {
+class _CastDetailsState extends State<CastDetails> {
   @override
   Widget build(BuildContext context) {
     ApiServices _apiService = ApiServices();
@@ -33,7 +33,7 @@ class _PersonDetailsState extends State<PersonDetails> {
           elevation: 0,
         ),
         body: FutureBuilder(
-          future: _apiService.personDetail(widget.person.id),
+          future: _apiService.personDetail(widget.castId),
           builder:
               (BuildContext context, AsyncSnapshot<PersonDetail> snapshot) {
             if (snapshot.hasData) {
@@ -55,8 +55,10 @@ class _PersonDetailsState extends State<PersonDetails> {
                               borderRadius: BorderRadius.circular(30),
                               //boxShadow: [kDefaultShadow],
                               image: DecorationImage(
-                                  image: NetworkImage(
-                                      "http://image.tmdb.org/t/p/w500/${snapshot.data.profilePath}"),
+                                  image: snapshot.data.profilePath != null
+                                      ? NetworkImage(
+                                          "http://image.tmdb.org/t/p/w500/${snapshot.data.profilePath}")
+                                      : AssetImage('assets/images/user.png'),
                                   fit: BoxFit.cover),
                               color: Colors.white70,
                             ),
@@ -72,22 +74,25 @@ class _PersonDetailsState extends State<PersonDetails> {
                                 height: 10,
                               ),
                               Text(
-                                snapshot.data.name,
+                                snapshot.data.name != null
+                                    ? snapshot.data.name
+                                    : "null",
                                 style: TextStyle(
                                     color: Colors.black87,
-                                    fontSize: 25,
+                                    fontSize: 22,
                                     fontWeight: FontWeight.w700),
                               ),
                               SizedBox(
                                 height: 10,
                               ),
-                              Text(snapshot.data.knownForDepartment,
+                              Text(
+                                  snapshot.data.knownForDepartment == null
+                                      ? "null"
+                                      : snapshot.data.knownForDepartment,
                                   style: TextStyle(
                                       color: Colors.grey.shade700,
                                       fontSize: 22,
                                       fontWeight: FontWeight.w600)),
-
-                              //Text(snapshot.data.birthday.subtract(Duration(days: snapshot.data.birthday.day)).toString(), style: TextStyle(color: Colors.grey, fontSize: 20, fontWeight: FontWeight.w600)),
                               SizedBox(
                                 height: 10,
                               ),
@@ -99,8 +104,10 @@ class _PersonDetailsState extends State<PersonDetails> {
                               SizedBox(
                                 height: 10,
                               ),
-
-                              Text(snapshot.data.popularity.toString(),
+                              Text(
+                                  snapshot.data.popularity.toString() == null
+                                      ? "null"
+                                      : snapshot.data.popularity.toString(),
                                   style: TextStyle(
                                       color: Colors.deepPurple.shade400,
                                       fontSize: 18,
@@ -132,7 +139,10 @@ class _PersonDetailsState extends State<PersonDetails> {
                               SizedBox(
                                 width: 10,
                               ),
-                              Text(snapshot.data.placeOfBirth,
+                              Text(
+                                  snapshot.data.placeOfBirth == null
+                                      ? "Null"
+                                      : snapshot.data.placeOfBirth,
                                   style: TextStyle(
                                       color: Colors.grey.shade600,
                                       fontSize: 18,
@@ -156,7 +166,10 @@ class _PersonDetailsState extends State<PersonDetails> {
                           Expanded(
                             child: SingleChildScrollView(
                               child: Container(
-                                child: Text(snapshot.data.biography,
+                                child: Text(
+                                    snapshot.data.biography == null
+                                        ? "null"
+                                        : snapshot.data.biography,
                                     style: TextStyle(
                                         color: Colors.grey.shade600,
                                         fontSize: 16,
